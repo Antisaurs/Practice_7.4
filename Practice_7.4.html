@@ -1,0 +1,56 @@
+---
+title: "Practice_7.4"
+output: html_document
+date: "2023-11-03"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r pressure, echo=FALSE}
+x <- c(25, 30, 35, 40, 45)
+y <- c(10000000000, 100000000, 100000000, 100000000, 1000000000)
+z <- c(20, 28, 32, 38, 42)
+
+
+AntisaursTTest <- function(data1, data2){
+# 平均值(Mean)
+mean_data1 <- mean(data1)
+mean_data2 <- mean(data2)
+
+#標準誤(SE)
+se_data1 <- sd(data1) / sqrt(length(data1))
+se_data2 <- sd(data2) / sqrt(length(data2))
+
+# t_ratio
+t_ratio <- (mean_data1 - mean_data2) / sqrt(se_data1^2 / length(data1) + se_data2^2 / length(data2))
+
+# 自由度(df)
+df <- length(data1) + length(data2) - 2
+
+# p-value
+p_value <- 2 * pt(abs(t_ratio), df, lower.tail = FALSE)
+
+# 显示t统计量和p值
+cat("t-ratio:", t_statistic, "\n")
+cat("p_value:", p_value, "\n")
+
+# 判断是否拒绝零假设
+alpha <- 0.05
+if (p_value < alpha) {
+  cat("Null hypothesis will be rejected")
+} else {
+  cat("Null hypothesis will not be rejected")
+}
+
+}
+```
+
+
+```{r pressure, echo=FALSE}
+AntisaursTTest(x, y)
+AntisaursTTest(x, z)
+AntisaursTTest(y, z)
+```
