@@ -34,7 +34,7 @@ df <- length(data1) + length(data2) - 2
 p_value <- 2 * pt(abs(t_ratio), df, lower.tail = FALSE)
 
 # 显示t统计量和p值
-cat("t-ratio:", t_statistic, "\n")
+cat("t-ratio:", t_ratio, "\n")
 cat("p_value:", p_value, "\n")
 
 # 判断是否拒绝零假设
